@@ -10,7 +10,6 @@ test.describe('User Story 1', () => {
     Otherwise, I want to be rejected and informed if the file is not a picture.
     */
 
-    let response;
     var imageFiles: Array<string> = [];
     var nonImageFiles: Array<string> = [];
     let imageEndpoint = '/api/image';
@@ -35,6 +34,8 @@ test.describe('User Story 1', () => {
     for(const imageFile of imageFiles){
         test(`TC01 - Upload image file  ${imageFile}`, async ({request}) => {
             let url;
+            let response;
+
             await test.step('POST ' + {imageEndpoint}, async () => {
                 const image = fs.readFileSync(imageFile);
                 
@@ -72,7 +73,8 @@ test.describe('User Story 1', () => {
     //SECOND TEST CASE
     for(const nonImagefile of nonImageFiles){
         test(`TC02 - Upload non image file  ${nonImagefile}`, async ({request}) => {
-            let url;
+            let response;
+
             await test.step('POST ' + {imageEndpoint}, async () => {
                 const image = fs.readFileSync(nonImagefile);
                 
