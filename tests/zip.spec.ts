@@ -75,7 +75,6 @@ test.describe('User Story 2', () => {
                     }
                 },
             });
-            console.log(response);
         });
 
         await test.step("Validate status code - {500}",async () => {
@@ -147,7 +146,6 @@ test.describe('User Story 2', () => {
                     }
                 },
             });
-            console.log(response);
         });
 
         await test.step("Validate status code - {403}",async () => {
@@ -156,7 +154,6 @@ test.describe('User Story 2', () => {
 
         await test.step("Validate response body to have {err} attribute - {File isn' a zip}", async () => {
             let jsonData = await response.json();
-            console.log(jsonData);
             expect.soft(jsonData.err).toBe("File isn' a zip"); 
         });
     });
