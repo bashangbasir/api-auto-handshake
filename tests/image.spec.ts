@@ -12,8 +12,8 @@ test.describe('User Story 1', () => {
 
     var imageFiles: Array<string> = [];
     var nonImageFiles: Array<string> = [];
-    let imageEndpoint = '/api/image';
-    let imageMimeType = 'image/png';
+    let imageEndpoint = "/api/image";
+    let imageMimeType = "image/png";
 
     //READ IMAGEFILES DATA 
     var imageFiles_ =  fs.readdirSync("./test-data/image-data/");
@@ -36,7 +36,7 @@ test.describe('User Story 1', () => {
             let url;
             let response;
 
-            await test.step('POST ' + {imageEndpoint}, async () => {
+            await test.step("POST " + {imageEndpoint}, async () => {
                 const image = fs.readFileSync(imageFile);
                 
                 response = await request.post(imageEndpoint, {
@@ -52,7 +52,7 @@ test.describe('User Story 1', () => {
                 });
             });
 
-            await test.step('Validate response - {200}', async () => {
+            await test.step("Validate response - {200}", async () => {
                 expect.soft(response.status()).toBe(200);
             });
 
@@ -60,12 +60,12 @@ test.describe('User Story 1', () => {
                 const responseData = await response.json();
                 url = responseData.image;
                 let regex = /https:\/\/assessement\.onrender\.com\/images\/[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}\.[A-Za-z]+/i;
-                expect.soft(responseData.image).toMatch(regex)
+                expect.soft(url).toMatch(regex)
             });
 
             await test.step('Get the image back by url', async () => {
-                response = await request.get(url);
-                expect.soft(response.status()).toBe(200);
+                let res = await request.get(url);
+                expect.soft(res.status()).toBe(200);
             });
         })
     }
