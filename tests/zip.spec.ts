@@ -14,6 +14,7 @@ test.describe('User Story 2', () => {
 
     test("TC03 - Upload zip file containing image file only", async ({request}) => {
         let response;
+
         await test.step("POST " + {zipEndpoint}, async () => {
             const zipFile = fs.readFileSync("./test-data/zip-data/image.zip")
             response = await request.post(zipEndpoint, {
@@ -47,12 +48,16 @@ test.describe('User Story 2', () => {
             });
         });
 
-        await test.step("Validate {images} have url",async () => {
+        await test.step("GET the url in {images}",async () => {
             let jsonData = await response.json();
-            jsonData.images.forEach( async element => {
-                let res = await request.get(element);
+            // jsonData.images.forEach( async element => {
+            //     let res = await request.get(element);
+            //     expect.soft(res.status()).toBe(200);
+            // });
+            for(let i=0; i<jsonData.images.length; i++){
+                let res = await request.get(jsonData.images[i]);
                 expect.soft(res.status()).toBe(200);
-            });
+            }
         });
 
 
@@ -124,10 +129,14 @@ test.describe('User Story 2', () => {
 
         await test.step("GET the url in {images}",async () => {
             let jsonData = await response.json();
-            jsonData.images.forEach( async element => {
-                let res = await request.get(element);
+            // jsonData.images.forEach( async element => {
+            //     let res = await request.get(element);
+            //     expect.soft(res.status()).toBe(200);
+            // });
+            for(let i=0; i<jsonData.images.length; i++){
+                let res = await request.get(jsonData.images[i]);
                 expect.soft(res.status()).toBe(200);
-            });
+            }
         });
     });
 
