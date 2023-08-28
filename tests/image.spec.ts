@@ -35,10 +35,10 @@ test.describe('User Story 1', () => {
         test(`TC01 - Upload image file  ${imageFile}`, async ({request}) => {
             let url;
             let response;
+            let imageMimeType = "image/" + imageFile.split(".")[2];
 
             await test.step("POST " + {imageEndpoint}, async () => {
                 const image = fs.readFileSync(imageFile);
-                
                 response = await request.post(imageEndpoint, {
                     headers: {
                     },
@@ -66,6 +66,7 @@ test.describe('User Story 1', () => {
             await test.step('Get the image back by url', async () => {
                 let res = await request.get(url);
                 expect.soft(res.status()).toBe(200);
+                expect.soft(res.headers()['content-type']).toContain(imageMimeType);
             });
         })
     }
@@ -74,7 +75,6 @@ test.describe('User Story 1', () => {
     for(const nonImagefile of nonImageFiles){
         test(`TC02 - Upload non image file  ${nonImagefile}`, async ({request}) => {
             let response;
-
             await test.step('POST ' + {imageEndpoint}, async () => {
                 const image = fs.readFileSync(nonImagefile);
                 

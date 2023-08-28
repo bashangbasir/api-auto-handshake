@@ -57,6 +57,7 @@ test.describe('User Story 2', () => {
             for(let i=0; i<jsonData.images.length; i++){
                 let res = await request.get(jsonData.images[i]);
                 expect.soft(res.status()).toBe(200);
+                expect.soft(res.headers()['content-type']).toContain('image/');
             }
         });
 
@@ -136,6 +137,7 @@ test.describe('User Story 2', () => {
             for(let i=0; i<jsonData.images.length; i++){
                 let res = await request.get(jsonData.images[i]);
                 expect.soft(res.status()).toBe(200);
+                expect.soft(res.headers()['content-type']).toContain('image/');
             }
         });
     });
