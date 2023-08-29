@@ -89,7 +89,7 @@ test.describe('User Story 2', () => {
 
         await test.step("Validate response body have {images} attribute = {no image found in zip file}",async () => {
             let jsonData = await response.json();
-            expect.soft(jsonData.err).toBe("no image found in zip file");
+            expect.soft(jsonData.err).toBe("No image found in zip file");
         });
     });
 
@@ -163,9 +163,9 @@ test.describe('User Story 2', () => {
             expect.soft(response.status()).toBe(403); 
         });
 
-        await test.step("Validate response body to have {err} attribute - {File isn' a zip}", async () => {
+        await test.step("Validate response body to have {err} attribute - {File isn't a zip}", async () => {
             let jsonData = await response.json();
-            expect.soft(jsonData.err).toBe("File isn' a zip"); 
+            expect.soft(jsonData.err).toBe("File isn't a zip"); 
         });
     });
 })

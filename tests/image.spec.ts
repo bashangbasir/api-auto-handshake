@@ -13,7 +13,7 @@ test.describe('User Story 1', () => {
     var imageFiles: Array<string> = [];
     var nonImageFiles: Array<string> = [];
     let imageEndpoint = "/api/image";
-    let imageMimeType = "image/png";
+
 
     //READ IMAGEFILES DATA 
     var imageFiles_ =  fs.readdirSync("./test-data/image-data/");
@@ -75,6 +75,7 @@ test.describe('User Story 1', () => {
     for(const nonImagefile of nonImageFiles){
         test(`TC02 - Upload non image file  ${nonImagefile}`, async ({request}) => {
             let response;
+            let imageMimeType = "image/png";
             await test.step('POST ' + {imageEndpoint}, async () => {
                 const image = fs.readFileSync(nonImagefile);
                 
@@ -95,7 +96,7 @@ test.describe('User Story 1', () => {
                 expect.soft(response.status()).toBe(403);
             });
 
-            await test.step("Validate response body got err  - {File is'n an image}", async () => {
+            await test.step("Validate response body got err  - {File isn't an image}", async () => {
                 const responseData = await response.json();
                 expect(responseData.err).toBe("File isn' an image");
             });
