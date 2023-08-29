@@ -83,8 +83,8 @@ test.describe('User Story 2', () => {
             });
         });
 
-        await test.step("Validate status code - {500}",async () => {
-            expect.soft(response.status()).toBe(500);
+        await test.step("Validate status code - {404}",async () => {
+            expect.soft(response.status()).toBe(404);
         });
 
         await test.step("Validate response body have {images} attribute = {no image found in zip file}",async () => {
