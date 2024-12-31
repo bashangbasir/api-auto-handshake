@@ -1,5 +1,5 @@
 # handshake-assessment
-Assessment for the Handshake 
+API automation for Handshake - Assessment
 
 # Setup 
 
